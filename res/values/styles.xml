@@ -1,0 +1,65 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowNoTitle">true</item>
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <!-- 标题栏样式 -->
+    <style name="TitleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">#8866ff00</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:text">TitleStyle</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+    <!-- 防盗页面内容样式 -->
+    <style name="ContentStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">ContentStyle</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawableLeft">@drawable/rate_star_med_on</item>
+    </style>
+    <!-- 防盗页面下一个按钮样式 -->
+<style name="next">
+    <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:text">next</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:onClick">next</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:drawableRight">@drawable/next</item>
+</style>
+    <!-- 防盗页面上一个按钮样式 -->
+<style name="previous">
+    <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:text">previous</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:onClick">previous</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:drawableLeft">@drawable/previous</item>
+</style>
+</resources>

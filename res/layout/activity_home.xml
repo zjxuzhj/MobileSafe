@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:background="#8866ff00"
+        android:text="功能列表"
+        android:textSize="25sp"
+        android:padding="10dp" />
+    <com.zhj.mobilesafe.ui.HomeTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="手机卫士哪家强？快来嘉兴找HongJay！64位全能杀毒王，敬请期待！"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:textSize="17sp"
+        android:marqueeRepeatLimit="-1"
+        android:focusableInTouchMode="true"
+        />
+
+    <GridView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gv_home_gridview"
+        android:numColumns="3"
+        android:layout_marginTop="10dp"
+        android:verticalSpacing="10dp"
+        ></GridView>
+</LinearLayout>
