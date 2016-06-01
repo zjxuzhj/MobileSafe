@@ -29,6 +29,7 @@ public class BlackNumberActivity extends Activity {
 			Lvlist.setAdapter(new BaseAdapter() {
 				private View mView;
 
+				
 				@Override
 				public int getCount() {
 					return mList.size();
