@@ -44,7 +44,7 @@ public class BlackNumberActivity extends Activity {
 				public long getItemId(int position) {
 					return position;
 				}
-
+//≥¢ ‘Ã·Ωª
 				@Override
 				public View getView(int position, View convertView, ViewGroup parent) {
 
