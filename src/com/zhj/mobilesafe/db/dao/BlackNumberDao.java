@@ -1,6 +1,7 @@
 package com.zhj.mobilesafe.db.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.zhj.mobilesafe.db.BlackNumberOpenHelper;
 import com.zhj.mobilesafe.domain.BlackNumberInfo;
@@ -77,27 +78,54 @@ public class BlackNumberDao {
 		return mode;
 	}
 
-	public ArrayList<BlackNumberInfo>  findAll() {
+	public ArrayList<BlackNumberInfo> findAll() {
 		SQLiteDatabase db = mOpenhelper.getWritableDatabase();
-		Cursor cursor = db.query(BlackNumberOpenHelper.sDB_NAME, new String[] { "blacknum", "mode" }, null,
-				null, null,null, null);
-		BlackNumberInfo info ;
+		Cursor cursor = db.query(BlackNumberOpenHelper.sDB_NAME, new String[] { "blacknum", "mode" }, null, null, null,
+				null, null);
+		BlackNumberInfo info;
 		ArrayList<BlackNumberInfo> list = new ArrayList<BlackNumberInfo>();
 		while (cursor.moveToNext()) {
 			String number = cursor.getString(0);
 			int mode = cursor.getInt(1);
-			info = new BlackNumberInfo();
-			info.number = number;
-			info.mode = mode;
+			info = new BlackNumberInfo(number, mode);
 			list.add(info);
 			info = null;
-			
+
 		}
 
-		
 		cursor.close();
 		db.close();
 		return list;
 	}
+
+	public ArrayList<BlackNumberInfo> getPartBlacknum(int MaxNum, int startIndex) {
+		List<BlackNumberInfo> list = new ArrayList<BlackNumberInfo>();
+		SQLiteDatabase db = mOpenhelper.getWritableDatabase();
+		Cursor cursor = db.rawQuery("select blacknum,mode from info order by _id desc limit ? offset ?",
+				new String[] { MaxNum + "", startIndex + "" });
+		while (cursor.moveToNext()) {
+			String blacknum = cursor.getString(0);
+			int mode = cursor.getInt(1);
+			BlackNumberInfo info = new BlackNumberInfo(blacknum, mode);
+			list.add(info);
+
+		}
+		cursor.close();
+		db.close();
+		return (ArrayList<BlackNumberInfo>) list;
+	}
+
+	public int getTotalCount() {
+		SQLiteDatabase db = mOpenhelper.getWritableDatabase();
+		Cursor cursor = db.rawQuery("select count(*) from info", null);
+		int total = 0;
+		if (cursor.moveToFirst()) {
+			total = cursor.getInt(0);
+		}
+		cursor.close();
+		db.close();
+		return total;
+	}
 	
+
 }

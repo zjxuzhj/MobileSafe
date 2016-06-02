@@ -11,7 +11,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:gravity="center_vertical"
-        android:src="@drawable/main_clean_icon" />
+        android:background="@drawable/button_clean"/>
 
     <TextView
         android:id="@+id/tv_number"
