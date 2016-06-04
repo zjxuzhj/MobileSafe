@@ -56,6 +56,10 @@ public class HomeActivity extends Activity {
 					Intent intent1=new Intent(HomeActivity.this,BlackNumberActivity.class);
 					startActivity(intent1);
 					break;
+				case 2:
+					Intent intent2=new Intent(HomeActivity.this,AppManagerActivity.class);
+					startActivity(intent2);
+					break;
 				case 8:
 					Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
 					startActivity(intent);
