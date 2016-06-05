@@ -1,21 +1,37 @@
 package com.zhj.mobilesafe;
 
 import java.util.ArrayList;
+
 import com.zhj.mobilesafe.domain.AppInfo;
 import com.zhj.mobilesafe.engine.AppInfoProvider;
+
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class AppManagerActivity extends Activity {
+public class AppManagerActivity extends Activity implements OnClickListener {
 
 	private ListView mLv;
 	private ArrayList<AppInfo> mList;
@@ -23,7 +39,11 @@ public class AppManagerActivity extends Activity {
 	private ArrayList<AppInfo> userappinfo;
 	private ArrayList<AppInfo> systemappinfo;
 	private ViewHolder2 holder2;
+	private PopupWindow mPopup;
+	private AppInfo mCurrentappinfo;
 	private TextView title2;
+	private AnimationSet mSet;
+	private View mContentView;
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			adapter = new appAdapter();
@@ -32,27 +52,92 @@ public class AppManagerActivity extends Activity {
 	};
 
 	@Override
+	public void onClick(View v) {
+		mPopup.dismiss();
+		switch (v.getId()) {
+		case R.id.tv_uninstall:
+			Intent intent = new Intent();
+			intent.setAction("android.intent.action.DELETE");
+			intent.addCategory("android.intent.category.DEFAULT");
+			intent.setData(Uri.parse("package:" + mCurrentappinfo.packagename));
+			startActivityForResult(intent, 0);
+			break;
+		case R.id.tv_launch:
+			PackageManager pm = getPackageManager();
+			Intent intent2 = pm.getLaunchIntentForPackage(mCurrentappinfo.packagename);
+			if (intent2 != null) {
+				startActivity(intent2);
+			} else {
+				Toast.makeText(getApplicationContext(), "系统核心程序,无法启动", 0).show();
+			}
+			break;
+		case R.id.tv_share:
+			Intent intent3 = new Intent();
+			intent3.setAction("android.intent.action.SEND");
+			intent3.setType("text/plain");
+			intent3.putExtra(Intent.EXTRA_TEXT, "发现一个很牛x软件" + mCurrentappinfo.appname + ",下载地址:www.baidu.com,自己去搜");
+			startActivity(intent3);
+			break;
+		}
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_appmanager);
 		mLv = (ListView) findViewById(R.id.lv);
-		title2=(TextView) findViewById(R.id.tv_title_head);
-		mLv.setOnScrollListener(new OnScrollListener() {
-
-			
+		mLv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				// TODO Auto-generated method stub
+			public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
+				if (mPopup == null) {
 
+					mContentView = View.inflate(getApplicationContext(), R.layout.popup_appinfo, null);
+
+					mPopup = new PopupWindow(mContentView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, true);
+
+					// 控件从小到大缩放
+					ScaleAnimation scaleAnimation = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0,
+							Animation.RELATIVE_TO_SELF, 0.5f);
+					scaleAnimation.setDuration(200);
+
+					// 渐变动画
+					AlphaAnimation alphaAnimation = new AlphaAnimation(0.4f, 1.0f);
+					alphaAnimation.setDuration(200);
+
+					mSet = new AnimationSet(false);
+					mSet.addAnimation(scaleAnimation);
+					mSet.addAnimation(alphaAnimation);
+
+					TextView tv_uninstall = (TextView) mContentView.findViewById(R.id.tv_uninstall);
+					TextView tv_launch = (TextView) mContentView.findViewById(R.id.tv_launch);
+					TextView tv_share = (TextView) mContentView.findViewById(R.id.tv_share);
+					tv_uninstall.setOnClickListener(AppManagerActivity.this);
+					tv_launch.setOnClickListener(AppManagerActivity.this);
+					tv_share.setOnClickListener(AppManagerActivity.this);
+				}
+
+				// 执行动画
+				mContentView.startAnimation(mSet);
+
+				mPopup.setBackgroundDrawable(new ColorDrawable());// 设置背景为无颜色，才能返回消失
+				mPopup.showAsDropDown(view, 200, -view.getHeight() - 10);// 在某个布局的正下方显示
+
+				mCurrentappinfo = adapter.getItem(position);
+			}
+		});
+		title2 = (TextView) findViewById(R.id.tv_title_head);
+		mLv.setOnScrollListener(new OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
 			}
 
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-				
+
 				if (userappinfo != null && systemappinfo != null) {
 
-					if (firstVisibleItem >=userappinfo.size() + 1) {
+					if (firstVisibleItem >= userappinfo.size() + 1) {
 
 						title2.setText("系统应用(" + systemappinfo.size() + ")");
 					} else {
@@ -86,10 +171,20 @@ public class AppManagerActivity extends Activity {
 
 	}
 
+	/**
+	 * 卸载完返回调用刷新列表
+	 * 
+	 * @param requestCode
+	 * @param resultCode
+	 * @param data
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		initData();
+	}
+
 	class appAdapter extends BaseAdapter {
-
-		
-
 		@Override
 		public int getCount() {
 			return userappinfo.size() + systemappinfo.size() + 2;
@@ -169,7 +264,6 @@ public class AppManagerActivity extends Activity {
 				holder.icon.setImageDrawable(appinfo.icon);
 				break;
 			}
-
 			return convertView;
 		}
 	}
@@ -184,4 +278,5 @@ public class AppManagerActivity extends Activity {
 
 		TextView title;
 	}
+
 }
