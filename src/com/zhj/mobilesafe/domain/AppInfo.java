@@ -7,5 +7,5 @@ public class AppInfo {
 	public String packagename;
 	public String appname;
 	public Drawable icon;
-	
+	public boolean isUser;
 }

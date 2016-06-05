@@ -21,6 +21,14 @@ public class AppInfoProvider {
 			AppInfo appinfo=new AppInfo();
 			appinfo.packagename= packageinfo.packageName;
 			ApplicationInfo applicationInfo = packageinfo.applicationInfo;
+			int flags = applicationInfo.flags;
+			
+			if((applicationInfo.FLAG_SYSTEM&flags)==applicationInfo.FLAG_SYSTEM){
+				appinfo.isUser=false;
+			}else{
+				appinfo.isUser=true;
+			}
+			
 			appinfo.icon = applicationInfo.loadIcon(pm);
 			appinfo.appname = applicationInfo.loadLabel(pm).toString();
 			list.add(appinfo);

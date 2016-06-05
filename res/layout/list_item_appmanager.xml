@@ -12,21 +12,23 @@
         android:src="@drawable/ic_launcher" />
 
     <TextView
-        android:paddingTop="5dp"
         android:id="@+id/tv_appname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/iv_icon"
-        android:text="应用名称" />
+        android:paddingTop="5dp"
+        android:text="应用名称"
+        android:textColor="#000000" />
 
     <TextView
-        android:paddingBottom="5dp"
         android:id="@+id/tv_packagename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/iv_icon"
         android:layout_alignLeft="@+id/tv_appname"
-        android:text="应用包名" />
+        android:paddingBottom="5dp"
+        android:text="应用包名"
+        android:textColor="#000000" />
 
 </RelativeLayout>

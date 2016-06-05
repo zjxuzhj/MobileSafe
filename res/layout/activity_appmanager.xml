@@ -8,9 +8,25 @@
     style="@style/TitleStyle"
     android:text="应用管理"
     />
-<ListView 
+<FrameLayout 
+     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <ListView 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/lv"
     ></ListView>
+
+       <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9e9e9e"
+        android:text="用户应用"
+        android:padding="3dp"
+        android:id="@+id/tv_title_head"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+</FrameLayout>
+
 </LinearLayout>
