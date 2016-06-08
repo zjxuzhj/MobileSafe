@@ -41,6 +41,7 @@
         <activity android:name="com.zhj.mobilesafe.ListViewActivity"></activity>
         <activity android:name="com.zhj.mobilesafe.AppManagerActivity"></activity>
    		<activity android:name="com.zhj.mobilesafe.BlackNumberActivity"></activity>
+        <activity android:name="com.zhj.mobilesafe.ProcessManegerActivity"></activity>
         <receiver android:name="com.zhj.mobilesafe.receiver.BootReceiver">
          <!-- priority : 广播接受者的优先级,值越大优先级越高,越先接收到广播 -->
             <intent-filter

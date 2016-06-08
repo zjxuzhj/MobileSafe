@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/TitleStyle"
+        android:text="进程管理" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+
+        <TextView
+            android:id="@+id/tv_title_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#9e9e9e"
+            android:padding="3dp"
+            android:text="用户进程"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal" >
+
+            <ProgressBar
+                android:id="@+id/pb_process"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pb_process"
+                android:layout_gravity="center_horizontal"
+                android:text="兄台请稍后！" />
+        </RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>
