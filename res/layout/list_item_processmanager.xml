@@ -31,4 +31,18 @@
         android:text="应用包名"
         android:textColor="#000000" />
 
+    <CheckBox
+        android:id="@+id/cb_isCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_ramSize"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="18dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+		
+         />
+
 </RelativeLayout>

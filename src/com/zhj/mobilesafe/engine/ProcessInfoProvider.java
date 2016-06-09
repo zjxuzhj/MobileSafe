@@ -53,6 +53,7 @@ public class ProcessInfoProvider {
 					// ”√ªß≥Ã–Ú
 					isUser = true;
 				}
+				info.isUser=isUser;
 			} catch (NameNotFoundException e) {
 				info.appName=packageName;
 				info.icon=ctx.getResources().getDrawable(R.drawable.default_system);
@@ -62,5 +63,15 @@ public class ProcessInfoProvider {
 			list.add(info);
 		}
 		return  list;
+	}
+	public static void killAll(Context ctx){
+		ActivityManager am=(ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+		List<RunningAppProcessInfo > runningAppProcessInfos=am.getRunningAppProcesses();
+		for(RunningAppProcessInfo runningAppProcessInfo: runningAppProcessInfos){
+			if(runningAppProcessInfo.processName.equals(ctx.getPackageName())){
+				continue;
+			}
+			am.killBackgroundProcesses(runningAppProcessInfo.processName);
+		}
 	}
 }

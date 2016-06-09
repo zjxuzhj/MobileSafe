@@ -9,6 +9,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -40,6 +41,7 @@
         <activity android:name="com.zhj.mobilesafe.Setup4Activity"></activity>
         <activity android:name="com.zhj.mobilesafe.ListViewActivity"></activity>
         <activity android:name="com.zhj.mobilesafe.AppManagerActivity"></activity>
+   		<activity android:name="com.zhj.mobilesafe.ProcessSettingActivity"></activity>
    		<activity android:name="com.zhj.mobilesafe.BlackNumberActivity"></activity>
         <activity android:name="com.zhj.mobilesafe.ProcessManegerActivity"></activity>
         <receiver android:name="com.zhj.mobilesafe.receiver.BootReceiver">
@@ -56,6 +58,7 @@
         </intent-filter>
     </receiver>
     <service android:name="com.zhj.mobilesafe.service.AddressService"></service>
+    <service android:name="com.zhj.mobilesafe.service.AutoKillService"></service>
     </application>
 
 </manifest>

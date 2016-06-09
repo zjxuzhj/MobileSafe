@@ -9,4 +9,5 @@ public class ProcessInfo {
 	public Drawable icon;
 	public String appName;
 	public boolean isUser;
+	public boolean isCheck=false;
 }
