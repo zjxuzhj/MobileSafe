@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/TitleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="高级工具" />
+
+    <TextView
+        android:id="@+id/tv_appLock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#72d572"
+        android:clickable="true"
+        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:gravity="center_vertical"
+        android:onClick="appLock"
+        android:text="程序锁"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+</LinearLayout>

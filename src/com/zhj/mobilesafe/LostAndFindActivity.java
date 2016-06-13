@@ -28,7 +28,7 @@ public class LostAndFindActivity extends Activity {
 			iv_lock.setImageResource(R.drawable.lock);
 			
 		} else {
-			iv_lock.setImageResource(R.drawable.unlock);
+//			iv_lock.setImageResource(R.drawable.unlock);
 		}
 		TextView tv_safenum = (TextView) findViewById(R.id.tv_safenum);
 		if (PrefUtils.getString(getApplicationContext(), "safenum", "") != "") {
