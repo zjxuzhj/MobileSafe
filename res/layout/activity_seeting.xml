@@ -24,5 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
     />
+    <com.zhj.mobilesafe.ui.SettingView
+        zhj:title="程序锁设置"
+        zhj:des_on="程序锁已开启"
+        zhj:des_off="程序锁已关闭"
+        android:id="@+id/sv_setting_applock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+    />
 
 </LinearLayout>
