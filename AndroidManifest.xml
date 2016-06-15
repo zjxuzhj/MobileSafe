@@ -21,6 +21,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -54,6 +55,7 @@
         </activity>
         <activity android:name="com.zhj.mobilesafe.ListViewActivity" >
         </activity>
+        <activity android:name="com.zhj.mobilesafe.CommonNumberActivity"></activity>
         <activity android:name="com.zhj.mobilesafe.AppManagerActivity" >
         </activity>
         <activity android:name="com.zhj.mobilesafe.ProcessSettingActivity" >
@@ -64,9 +66,13 @@
         </activity>
         <activity android:name="com.zhj.mobilesafe.AToolActivity" >
         </activity>
-        <activity android:name="com.zhj.mobilesafe.AppLockActivity" >
+        <activity
+            android:name="com.zhj.mobilesafe.AppLockActivity"
+            android:launchMode="singleInstance" >
         </activity>
-        <activity android:name="com.zhj.mobilesafe.EnterPwdActivity" >
+        <activity
+            android:name="com.zhj.mobilesafe.EnterPwdActivity"
+            android:excludeFromRecents="true" >
         </activity>
 
         <receiver android:name="com.zhj.mobilesafe.receiver.BootReceiver" >

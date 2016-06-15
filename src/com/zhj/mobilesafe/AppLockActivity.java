@@ -116,7 +116,6 @@ public class AppLockActivity extends Activity {
 					} else {
 						mUnlockList.add(appInfo);
 					}
-
 				}
 
 				handler.sendEmptyMessage(0);

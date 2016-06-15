@@ -1,6 +1,7 @@
 package com.zhj.mobilesafe;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -62,6 +63,7 @@ public class SplashActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
+		copyDb("commonnum.db");// 常用号码查询的数据库拷贝
 		tv_splash_versionname=(TextView) findViewById(R.id.tv_splash_versionname);
 		tv_splash_versionname.setText("版本号:"+getVersionName());
 		tv_download_onloading=(TextView) findViewById(R.id.tv_download_onloading);
@@ -265,6 +267,44 @@ public class SplashActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		enterHome();
 	}
-	
+	/**
+	 * 拷贝assets下的数据库至data/data目录
+	 */
+	private void copyDb(String dbName) {
+		File filesDir = getFilesDir();// 获取data/data/files目录的文件夹
+		// System.out.println("filesDir:" + filesDir.getAbsolutePath());
+		File outFile = new File(filesDir, dbName);
+
+		if (outFile.exists()) {
+			System.out.println("数据库" + dbName + "已经存在,无需拷贝!");
+			return;
+		}
+
+		FileOutputStream out = null;
+		InputStream in = null;
+		try {
+			out = new FileOutputStream(outFile);
+			in = getAssets().open(dbName);
+
+			int len = 0;
+			byte[] buffer = new byte[1024];
+
+			while ((len = in.read(buffer)) != -1) {
+				out.write(buffer, 0, len);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				out.close();
+				in.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		System.out.println("拷贝数据库" + dbName + "成功!");
+	}
 	
 }

@@ -23,5 +23,17 @@
         android:text="程序锁"
         android:textColor="@color/black"
         android:textSize="18sp" />
+    <TextView
+        android:id="@+id/tv_numfind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#72d572"
+        android:clickable="true"
+        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:gravity="center_vertical"
+        android:onClick="numfind"
+        android:text="常用号码查询"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
 </LinearLayout>

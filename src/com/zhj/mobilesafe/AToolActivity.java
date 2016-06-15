@@ -18,4 +18,8 @@ public class AToolActivity extends Activity {
 		Intent intent=new Intent(getApplicationContext(), AppLockActivity.class);
 		startActivity(intent);
 	}
+	public void numfind(View v){
+		Intent intent=new Intent(getApplicationContext(), CommonNumberActivity.class);
+		startActivity(intent);
+	}
 }

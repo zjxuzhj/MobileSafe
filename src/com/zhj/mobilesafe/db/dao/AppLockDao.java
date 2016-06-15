@@ -12,14 +12,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 
 public class AppLockDao {
 
+	private Context mContext;
 	private static AppLockDao sInstance;
 	private AppLockOpenHelper mOpenhelper;
 
 	private AppLockDao(Context ctx) {
 		mOpenhelper = new AppLockOpenHelper(ctx);
+		mContext = ctx;
 
 	}
 
@@ -48,6 +51,9 @@ public class AppLockDao {
 		values.put("packagename", packagename);
 		db.insert(AppLockOpenHelper.sDB_NAME, null, values);
 		db.close();
+		// 通知数据库更新
+		mContext.getContentResolver().notifyChange(
+				Uri.parse("content://com.zhj.MobileSafe/change"), null);
 	}
 
 	// 删除操作
@@ -55,6 +61,8 @@ public class AppLockDao {
 		SQLiteDatabase db = mOpenhelper.getWritableDatabase();
 		db.delete(AppLockOpenHelper.sDB_NAME, "packagename=?", new String[] { packagename });
 		db.close();
+		mContext.getContentResolver().notifyChange(
+				Uri.parse("content://com.zhj.MobileSafe/change"), null);
 	}
 
 	public boolean find(String packagename) {
