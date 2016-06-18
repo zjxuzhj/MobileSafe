@@ -39,7 +39,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.zhj.mobilesafe.TrafficManagerActivity" >
+        </activity>
         <activity android:name="com.zhj.mobilesafe.HomeActivity" >
+        </activity>
+        <activity android:name="com.zhj.mobilesafe.AnitVirusActivityy" >
         </activity>
         <activity android:name="com.zhj.mobilesafe.SettingActivity" >
         </activity>
@@ -55,7 +59,8 @@
         </activity>
         <activity android:name="com.zhj.mobilesafe.ListViewActivity" >
         </activity>
-        <activity android:name="com.zhj.mobilesafe.CommonNumberActivity"></activity>
+        <activity android:name="com.zhj.mobilesafe.CommonNumberActivity" >
+        </activity>
         <activity android:name="com.zhj.mobilesafe.AppManagerActivity" >
         </activity>
         <activity android:name="com.zhj.mobilesafe.ProcessSettingActivity" >

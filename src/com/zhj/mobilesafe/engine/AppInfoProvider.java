@@ -19,6 +19,7 @@ public class AppInfoProvider {
 		List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
 		for(PackageInfo packageinfo: installedPackages){
 			AppInfo appinfo=new AppInfo();
+			
 			appinfo.packagename= packageinfo.packageName;
 			ApplicationInfo applicationInfo = packageinfo.applicationInfo;
 			int flags = applicationInfo.flags;

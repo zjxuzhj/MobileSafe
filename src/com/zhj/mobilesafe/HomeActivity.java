@@ -32,7 +32,6 @@ public class HomeActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		Intent intent=new Intent(this,AddressService.class);
@@ -43,7 +42,6 @@ public class HomeActivity extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO Auto-generated method stub
 				switch (position) {
 				case 0:
 					if (PrefUtils.getString(getApplicationContext(), "password", "").equals("")) {
@@ -64,9 +62,17 @@ public class HomeActivity extends Activity {
 					Intent intent3=new Intent(HomeActivity.this,ProcessManegerActivity.class);
 					startActivity(intent3);
 					break;
-				case 7:
-					Intent intent4=new Intent(HomeActivity.this,AToolActivity.class);
+				case 4:
+					Intent intent4=new Intent(HomeActivity.this,TrafficManagerActivity.class);
 					startActivity(intent4);
+					break;
+				case 5:
+					Intent intent5=new Intent(HomeActivity.this,AnitVirusActivityy.class);
+					startActivity(intent5);
+					break;
+				case 7:
+					Intent intent7=new Intent(HomeActivity.this,AToolActivity.class);
+					startActivity(intent7);
 					break;
 				case 8:
 					Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
@@ -80,7 +86,6 @@ public class HomeActivity extends Activity {
 	}
 	int count=0;
 	protected void showEnterPasswordDialog() {
-		// TODO Auto-generated method stub
 		AlertDialog.Builder builder = new Builder(this);
 		builder.setCancelable(false);
 		View view = View.inflate(getApplicationContext(), R.layout.dialog_enterpassword, null);
