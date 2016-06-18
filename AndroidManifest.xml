@@ -22,6 +22,7 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
 
     <application
         android:allowBackup="true"
@@ -40,6 +41,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.zhj.mobilesafe.TrafficManagerActivity" >
+        </activity>
+        <activity android:name="com.zhj.mobilesafe.CleanCacheActivity" >
         </activity>
         <activity android:name="com.zhj.mobilesafe.HomeActivity" >
         </activity>
