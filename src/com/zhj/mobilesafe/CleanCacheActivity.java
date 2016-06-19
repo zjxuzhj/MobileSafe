@@ -4,22 +4,27 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageDataObserver;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PackageStats;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CleanCacheActivity extends Activity {
 	private static final int SCANNING = 1;
@@ -28,6 +33,7 @@ public class CleanCacheActivity extends Activity {
 	private LinearLayout ll_cache;
 	private ProgressBar pb_cache;
 	private TextView tv_cache;
+	private PackageManager pm;
 
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -42,14 +48,26 @@ public class CleanCacheActivity extends Activity {
 				tv_cache.setText("扫描结束");
 				break;
 			case CACHE_UPDATE:
-				CacheInfo info = (CacheInfo) msg.obj;
+				final CacheInfo info = (CacheInfo) msg.obj;
 				View view = View.inflate(getApplicationContext(), R.layout.list_item_cache, null);
 				TextView tv_app = (TextView) view.findViewById(R.id.tv_appname);
 				TextView tv_size = (TextView) view.findViewById(R.id.tv_size);
 				ImageView iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
+				ImageView iv_clean = (ImageView) view.findViewById(R.id.iv_clean);
+				iv_clean.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent intent=new Intent();
+						intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+						intent.setData(Uri.parse("package:"+info.packageName));
+						startActivity(intent);
+					}
+				});
 				tv_app.setText(info.label);
-				tv_size.setText(info.cacheSize /1024+ "KB");
+				tv_size.setText(info.cacheSize / 1024 + "KB");
 				iv_icon.setImageDrawable(info.icon);
+				
 				ll_cache.addView(view, 0);
 				break;
 
@@ -58,7 +76,28 @@ public class CleanCacheActivity extends Activity {
 			}
 		};
 	};
-	private PackageManager pm;
+
+	public void clearAllCache(View v) {
+
+		try {
+			Method method = PackageManager.class.getMethod("freeStorageAndNotify", long.class,
+					IPackageDataObserver.class);
+
+			method.invoke(pm, Long.MAX_VALUE, new IPackageDataObserver.Stub() {
+
+				@Override
+				public void onRemoveCompleted(String packageName, boolean succeeded) throws RemoteException {
+					System.out.println("succeeded-->" + succeeded);
+
+				}
+
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Toast.makeText(getApplicationContext(), "清理成功！", 0).show();
+	}
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

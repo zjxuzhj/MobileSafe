@@ -95,7 +95,7 @@ public class CommonNumberActivity extends Activity {
 			textview.setText(groups.get(groupPosition).childsInfo
 					.get(childPosition).name + "\n"
 					+ groups.get(groupPosition).childsInfo.get(childPosition).number);
-			textview.setTextColor(Color.GREEN);
+			textview.setTextColor(Color.BLACK);
 			textview.setTextSize(25);
 			return textview;
 		}

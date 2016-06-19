@@ -11,7 +11,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Intent;
-import android.location.Address;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,8 +22,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import net.youmi.android.AdManager;
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
 
 public class HomeActivity extends Activity {
 	GridView gv_home_gridview;
@@ -34,6 +37,15 @@ public class HomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+		AdManager.getInstance(this).init("c2f0e756bcc42e8b","864fe12ab48fcbed", true);
+		// 实例化广告条
+		AdView adView = new AdView(this, AdSize.FIT_SCREEN);
+
+		// 获取要嵌入广告条的布局
+		LinearLayout adLayout=(LinearLayout)findViewById(R.id.adLayout);
+
+		// 将广告条加入到布局中
+		adLayout.addView(adView);
 		Intent intent=new Intent(this,AddressService.class);
 		startService(intent);
 		gv_home_gridview = (GridView) findViewById(R.id.gv_home_gridview);
@@ -88,23 +100,25 @@ public class HomeActivity extends Activity {
 
 		});
 	}
-	int count=0;
+
+	int count = 0;
+
 	protected void showEnterPasswordDialog() {
 		AlertDialog.Builder builder = new Builder(this);
 		builder.setCancelable(false);
 		View view = View.inflate(getApplicationContext(), R.layout.dialog_enterpassword, null);
 		final EditText et_setpassword_confrim = (EditText) view.findViewById(R.id.et_confimpassword);
 		Button btn_ok = (Button) view.findViewById(R.id.btn_ok);
-		ImageView iv=(ImageView) view.findViewById(R.id.btn_img);
-		 
+		ImageView iv = (ImageView) view.findViewById(R.id.btn_img);
+
 		iv.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-				if(count%2==0){
+
+				if (count % 2 == 0) {
 					et_setpassword_confrim.setInputType(0);
-				}else{
+				} else {
 					et_setpassword_confrim.setInputType(129);
 				}
 				count++;
@@ -120,7 +134,7 @@ public class HomeActivity extends Activity {
 					Intent intent = new Intent(getApplicationContext(), LostAndFindActivity.class);
 					mDialog.dismiss();
 					startActivity(intent);
-				}else{
+				} else {
 					Toast.makeText(getApplicationContext(), "您输入的密码存在问题，请核对后重新输入！", 0).show();
 				}
 			}
@@ -199,7 +213,7 @@ public class HomeActivity extends Activity {
 					PrefUtils.putString(getApplicationContext(), "password", passwordmd5);
 					mDialog.dismiss();
 					Toast.makeText(getApplicationContext(), "密码保存成功！", 0).show();
-					Intent intent=new Intent(getApplicationContext(), Setup1Activity.class);
+					Intent intent = new Intent(getApplicationContext(), Setup1Activity.class);
 					startActivity(intent);
 					finish();
 				} else {

@@ -6,5 +6,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/xUtils-2.5.5.jar"/>
+	<classpathentry kind="lib" path="libs/YoumiSdk_v6.0.0_2016-02-26.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
