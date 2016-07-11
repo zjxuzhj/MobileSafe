@@ -2,6 +2,7 @@ package com.zhj.mobilesafe.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class HomeTextView extends TextView {

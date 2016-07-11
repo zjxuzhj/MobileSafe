@@ -79,7 +79,7 @@ public class HomeActivity extends Activity {
 					startActivity(intent4);
 					break;
 				case 5:
-					Intent intent5=new Intent(HomeActivity.this,AnitVirusActivityy.class);
+					Intent intent5=new Intent(HomeActivity.this,AnitVirusActivity.class);
 					startActivity(intent5);
 					break;
 				case 6:
@@ -241,19 +241,16 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return 9;
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 

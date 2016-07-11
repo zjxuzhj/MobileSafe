@@ -30,7 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class AnitVirusActivityy extends Activity {
+public class AnitVirusActivity extends Activity {
 
 	private static final int SCAN_PASS = 0;
 	private static final int SCAN_STOP = 1;

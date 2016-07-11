@@ -51,7 +51,7 @@
         </activity>
         <activity android:name="com.zhj.mobilesafe.HomeActivity" >
         </activity>
-        <activity android:name="com.zhj.mobilesafe.AnitVirusActivityy" >
+        <activity android:name="com.zhj.mobilesafe.AnitVirusActivity" >
         </activity>
         <activity android:name="com.zhj.mobilesafe.SettingActivity" >
         </activity>
